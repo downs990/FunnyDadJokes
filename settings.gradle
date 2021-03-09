@@ -1,0 +1,4 @@
+include ':androidactivitylibrary'
+include ':JavaJokeLibrary'
+include ':app', ':backend'
+rootProject.name = 'FunnyDadJokes'
