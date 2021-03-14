@@ -12,14 +12,21 @@ import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
+
     private static MyApi myApiService = null;
     private Context context;
+    private OnCompletionListener listener;
+
 
     // Setup GCE link
     // https://github.com/GoogleCloudPlatform/gradle-appengine-templates/tree/77e9910911d5412e5efede5fa681ec105a0f02ad/HelloEndpoints#2-connecting-your-android-app-to-the-backend
 
+    EndpointsAsyncTask(OnCompletionListener listener) {
+        this.listener = listener;
+    }
 
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
@@ -59,7 +66,8 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
         String name = params[0].second;
 
         try {
-            return myApiService.sayHi(name).execute().getData();
+            return myApiService.grabAJoke().execute().getJoke();
+//            return myApiService.sayHi(name).execute().getData();
         } catch (IOException e) {
             return e.getMessage();
         }
@@ -68,5 +76,9 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
     @Override
     protected void onPostExecute(String result) {
         Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+    }
+
+    public interface OnCompletionListener {
+        void onComplete(String joke);
     }
 }

@@ -2,6 +2,7 @@ package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,8 @@ import android.widget.Toast;
 import com.downs.androidactivitylibrary.JokeActivity;
 import com.downs.javajokelibrary.MyJoke;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,12 +23,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        // Call my endpoint
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
-
-        // TODO: Fix the ads IDs and update the name of the app in AsMob.
 
     }
 
@@ -52,16 +49,24 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void launchLibraryActivity(View view){
+    public void launchLibraryActivity(View view) {
 
-        // My java library
-        MyJoke mj = new MyJoke();
-        Toast.makeText(this, "Joke: " + mj.getJoke(), Toast.LENGTH_LONG).show();
+        // TODO: Fix the ads IDs and update the name of the app in AsMob.
 
-        // My Android Library
-        Intent intent = new Intent(this, JokeActivity.class);
-        intent.putExtra("NEW_JOKE", mj.getJoke());
-        startActivity(intent);
+        final Intent intent = new Intent(this, JokeActivity.class);
+
+        EndpointsAsyncTask endpointTask = new EndpointsAsyncTask(new EndpointsAsyncTask.OnCompletionListener() {
+            @Override
+            public void onComplete(String joke) {
+                // My Android Library
+                intent.putExtra("NEW_JOKE", joke);
+                startActivity(intent);
+            }
+        });
+
+        endpointTask.execute(new Pair<Context, String>(this, "Manfred"));
+
+
     }
 
 }
