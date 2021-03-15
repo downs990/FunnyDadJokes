@@ -2,27 +2,50 @@ package com.udacity.gradle.builditbigger;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
-
+import android.widget.Button;
 import com.downs.androidactivitylibrary.JokeActivity;
-import com.downs.javajokelibrary.MyJoke;
-
-import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
 
+    private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        context = this;
+
+        Button jokeButton = findViewById(R.id.joke_button);
+        jokeButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                // TODO: Fix the ads IDs and update the name of the app in AsMob.
+                final Intent intent = new Intent(context, JokeActivity.class);
+
+                EndpointsAsyncTask endpointTask = new EndpointsAsyncTask(
+                                                  new EndpointsAsyncTask.OnCompletionListener() {
+                    @Override
+                    public void onComplete(String joke) {
+                        // My Android Library
+                        intent.putExtra("NEW_JOKE", joke);
+                        startActivity(intent);
+                    }
+                });
+
+                endpointTask.execute(new Pair<Context, String>(context, "Manfred"));
+
+            }
+        });
+
 
     }
 
@@ -49,24 +72,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void launchLibraryActivity(View view) {
 
-        // TODO: Fix the ads IDs and update the name of the app in AsMob.
-
-        final Intent intent = new Intent(this, JokeActivity.class);
-
-        EndpointsAsyncTask endpointTask = new EndpointsAsyncTask(new EndpointsAsyncTask.OnCompletionListener() {
-            @Override
-            public void onComplete(String joke) {
-                // My Android Library
-                intent.putExtra("NEW_JOKE", joke);
-                startActivity(intent);
-            }
-        });
-
-        endpointTask.execute(new Pair<Context, String>(this, "Manfred"));
-
-
-    }
 
 }

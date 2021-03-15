@@ -13,10 +13,8 @@
     <!-- TODO: delete before commit -->
 
     <!-- Ad related strings -->
-    <string name="ad_application_id">ca-app-pub-4020688948945564~6347566099</string>
+    <string name="ad_application_id"></string>
     <string name="ad_unit_id">ca-app-pub-3940256099942544/630097811</string>
-    <!-- REAL UNIT ID:  ca-app-pub-4020688948945564/8502547029 -->
-    <!-- TEST UNIT ID:  ca-app-pub-3940256099942544/6300978111 -->
 
 
 

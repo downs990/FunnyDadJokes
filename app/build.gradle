@@ -26,6 +26,24 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
+    // Specifies one flavor dimension.
+    flavorDimensions "version"
+
+    productFlavors{
+        free{
+            // Assigns this product flavor to the "version" flavor dimension.
+            // If you are using only one dimension, this property is optional,
+            // and the plugin automatically assigns all the module's flavors to
+            // that dimension.
+            dimension "version"
+            applicationId "com.udacity.gradle.builditbigger.free"
+        }
+        paid{
+            dimension "version"
+            applicationId "com.udacity.gradle.builditbigger.paid"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -39,7 +57,7 @@ dependencies {
     endpointsServer project(path: ':backend', configuration: 'endpoints')
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.google.android.gms:play-services-ads:11.8.0'
+    freeImplementation 'com.google.android.gms:play-services-ads:11.8.0'
     implementation 'com.google.api-client:google-api-client:1.23.0'
     implementation 'com.google.http-client:google-http-client-android:1.23.0'
     implementation 'com.google.code.findbugs:jsr305:3.0.1'
@@ -47,9 +65,11 @@ dependencies {
     implementation project(":JavaJokeLibrary")
     implementation project(":androidactivitylibrary")
 
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+//    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+//        exclude group: 'com.android.support', module: 'support-annotations'
+//    })
 
     testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }

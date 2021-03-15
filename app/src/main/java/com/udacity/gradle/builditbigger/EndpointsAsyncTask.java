@@ -50,11 +50,6 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
             myApiService = builder.build();
 
 
-
-
-            // TODO: Project contains a Google Cloud Endpoints module that supplies jokes from the
-            //  Java library. Project loads jokes from GCE module via an AsyncTask.
-
             // TODO: Project contains connected tests to verify that the AsyncTask is indeed loading
             //  jokes.
 
@@ -74,8 +69,10 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
     }
 
     @Override
-    protected void onPostExecute(String result) {
-        Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+    protected void onPostExecute(String joke) {
+        listener.onComplete(joke);
+
+        Toast.makeText(context, joke, Toast.LENGTH_LONG).show();
     }
 
     public interface OnCompletionListener {
