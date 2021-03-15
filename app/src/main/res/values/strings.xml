@@ -13,9 +13,8 @@
     <!-- TODO: delete before commit -->
 
     <!-- Ad related strings -->
-    <string name="ad_application_id"></string>
+    <string name="ad_application_id"> ENTER_YOUR_OWN_ID </string>
     <string name="ad_unit_id">ca-app-pub-3940256099942544/630097811</string>
-
 
 
 </resources>
