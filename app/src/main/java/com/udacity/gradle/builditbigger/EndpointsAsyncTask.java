@@ -50,11 +50,7 @@ class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> 
             myApiService = builder.build();
 
 
-            // TODO: Project contains connected tests to verify that the AsyncTask is indeed loading
-            //  jokes.
 
-            // TODO: App retrieves jokes from Google Cloud Endpoints module and displays them via
-            //  an Activity from the Android Library. NOTE THAT THE GCE MODULE NEED ONLY BE DEPLOYED LOCALLY.
         }
 
         context = params[0].first;
