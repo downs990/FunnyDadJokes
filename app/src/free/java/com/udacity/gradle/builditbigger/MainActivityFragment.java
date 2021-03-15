@@ -12,6 +12,7 @@ import com.downs.androidactivitylibrary.JokeActivity;
 import com.downs.javajokelibrary.MyJoke;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.udacity.gradle.builditbigger.R;
 
 
 /**
